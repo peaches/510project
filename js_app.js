@@ -8,20 +8,55 @@ SR.App = Backbone.Router.extend({
     'proto': 'proto'
   },
 
+  initialize: function() {
+    SR.mp3 = new Audio('ringer.mp3');
+    var $proto = $('#proto');
+
+    $proto.on('click', '.call', _.bind(this.dispatch, this, 'receiveCall'));
+    $proto.on('click', '.flip', _.bind(this.dispatch, this, 'toggleFlip'));
+    $proto.on('click', '.shake', _.bind(this.dispatch, this, 'shakePhone'));
+
+    this.selectCurrent(window.location.hash.substr(1));
+  },
+
+  dispatch: function(name, e) {
+    e.preventDefault();
+    if (SR.phoneInstance) {
+      var func = SR.phoneInstance[name];
+      if (func) {
+        func.apply(SR.phoneInstance);
+      }
+    }
+  },
+
+  selectCurrent: function(menuItem) {
+    menuItem = menuItem || 'index';
+    $('header .' + menuItem).addClass('current');
+  },
+
+  hideAll: function() {
+    $('.main > *').hide();
+  },
+
   index: function() {
-    console.log('index');
+    this.hideAll();
+    $('#index').show();
   },
 
   docs: function() {
+    this.hideAll();
     console.log('docs');
   },
 
   proto: function() {
+    this.hideAll();
+    $('#proto').show();
     var container = $('#phone');
     var model = new Backbone.Model({
       ringer: true,
       shake: false,
       flip: false,
+      isFlipped: false,
       calendar: false,
       crowd: false
     });
@@ -135,6 +170,58 @@ SR.HomeScreen = SR.View.extend({
 
   openApp: function() {
     this.screen('app');
+  },
+
+  receiveCall: function() {
+    if (this.model.get('flip')) {
+      if (!this.model.get('isFlipped')) {
+        this.ring();
+      }
+    } else {
+      this.ring();
+    }
+  },
+
+  getPhone: function() {
+    return $('#phone');
+  },
+
+  toggleFlip: function() {
+    // hack, but this works for the limited time
+    var phone = this.getPhone();
+    phone.fadeOut(function() {
+      phone.toggleClass('flipped');
+      phone.fadeIn();
+    });
+    this.model.set('isFlipped', !this.model.get('isFlipped'));
+
+    if (this.model.get('flip')) {
+      this.stopRing();
+    }
+  },
+
+  shakePhone: function() {
+    var phone = this.getPhone();
+    phone.addClass('animated shake');
+
+    setTimeout(function() {
+      phone.removeClass('animated shake');
+    }, 1200);
+
+    if (this.model.get('shake')) {
+      this.stopRing();
+    }
+  },
+
+  ring: function() {
+    if (this.model.get('ringer')) {
+      SR.mp3.play();
+    }
+  },
+
+  stopRing: function() {
+    SR.mp3.pause();
+    SR.mp3.load();
   }
 });
 
@@ -176,7 +263,6 @@ SR.AppOverview = SR.View.extend({
 
   openRecurringScreen: function() {
     this.slideIn('recurring');
-    // this.screen('recurring');
   },
 
   exitApp: function() {

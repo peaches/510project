@@ -1,3 +1,8 @@
+html {
+  overflow: -moz-scrollbars-vertical;
+  overflow-y: scroll;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
   margin: 0;
@@ -12,6 +17,22 @@ a:hover {
   color: #000;
 }
 
+.red {
+  color: red;
+}
+
+.white {
+  color: white;
+}
+
+.green {
+  color: rgb(59, 185, 59);
+}
+
+.btn {
+  background-color: #ffcc99;
+  font-size: 20px;
+}
 
 header {
   display: block;
@@ -40,11 +61,76 @@ header a.current {
   width: 960px;
 }
 
-.main #phone {
+.main #index {
   width: 400px;
   height: 669px;
   background-image: url(phone.png);
   position: relative;
+  text-align: center;
+  font-size: 30px;
+}
+
+.main #index .logo {
+  margin: auto;
+  height: 135px;
+  width: 143px;
+  background-image: url(bell.png);
+  background-repeat: no-repeat;
+  position: relative;
+  top: 150px;
+}
+
+.main #index .logo .christmas {
+  display: block;
+  width: 235px;
+  position: relative;
+  top: -40px;
+  left: -45px;
+}
+
+.main #index .logo .title {
+  position: relative;
+  top: 110px;
+}
+
+.main #phone {
+  height: 669px;
+  background-image: url(phone.png);
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.main #phone.flipped {
+  display: none;
+}
+
+.main #phone.flipped > * {
+  display: none;
+}
+  
+.main #phone.flipped:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url(phone-back.png);
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  display: block;
+  content: "";
+}
+
+.main #proto .text-content {
+  margin: 100px 200px 0 0;
+  float: right;
+  width: 200px;
+  position: relative;
+  z-index: 10;
+}
+
+.main #proto .text-content .btn {
+  display: block;
+  margin: 2px;
 }
 
 .main .phone {

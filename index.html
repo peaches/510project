@@ -1,13 +1,39 @@
+<link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css_style.css">
+<link rel="stylesheet" href="css_shake.css">
 
 <header>
-  <a href="#" class="current">Overview</a>
-  <a href="#docs">Documentation</a>
-  <a href="#proto">Prototype</a>
+  <a class="index" href="#" class="current">Overview</a>
+  <a class="docs" href="#docs">Documentation</a>
+  <a class="proto" href="#proto">Prototype</a>
 </header>
 
 <div class="main">
-  <div id="phone">
+  <div id="index">
+    <div class="phone">
+      <div class="content-wrapper">
+        <div class="content">
+          <div class="logo">
+            <span class="christmas">
+              <span class="red">'Tis</span>
+              <span class="white">the</span>
+              <span class="green">Season</span>
+            </span>
+            <span class="title">Smart<br>Ringer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="docs"></div>
+  <div id="proto">
+    <div class="text-content">
+      <a class="btn call" href="#">call</a>
+      <br>
+      <a class="btn flip" href="#">flip phone</a>
+      <a class="btn shake" href="#">shake phone</a>
+    </div>
+    <div id="phone"></div>
   </div>
 </div>
 
@@ -44,6 +70,17 @@
         <div class="toggle <%= flip ? 'on' : '' %>"></div>
       </div>
 
+      <div class="row header">Proximity</div>
+      <!--
+      <div class="row clickable proximity-crowd">
+        Crowd detection
+        <div class="toggle <%= crowd ? 'on' : '' %>"></div>
+      </div>
+      -->
+      <div class="row clickable proximity-location">
+        Locations
+      </div>
+
       <div class="row header">Scheduling</div>
       <div class="row clickable scheduling-calendar">
         Integrate with calendar
@@ -51,15 +88,6 @@
       </div>
       <div class="row clickable scheduling-recurring">
         Set recurring events
-      </div>
-
-      <div class="row header">Proximity</div>
-      <div class="row clickable proximity-crowd">
-        Crowd detection
-        <div class="toggle <%= crowd ? 'on' : '' %>"></div>
-      </div>
-      <div class="row clickable proximity-location">
-        Locations
       </div>
 
       <div class="row header">Custom Settings</div>
