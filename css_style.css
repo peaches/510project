@@ -211,6 +211,8 @@ header a.current {
 }
 
 .phone .content .row {
+  width: 305;
+  margin: auto;
   height: 45px;
   line-height: 45px;
   font-size: 17px;
@@ -229,6 +231,21 @@ header a.current {
   background-color: #465274;
   line-height: 22px;
   padding-left: 10px;
+}
+
+.phone .content .row.not-implemented {
+  position: relative;
+}
+
+.phone .content .row.not-implemented:after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 305px;
+  left: 0;
+  top: 0;
+  background-color: #333;
+  opacity: 0.7;
 }
 
 .phone .content .row .toggle {
