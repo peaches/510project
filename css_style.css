@@ -43,7 +43,7 @@ header a.current {
 .main #phone {
   width: 400px;
   height: 669px;
-  background-image: url(../phone.png);
+  background-image: url(phone.png);
   position: relative;
 }
 
@@ -101,7 +101,7 @@ header a.current {
   float: left;
   position: relative;
   top: 5px;
-  background-image: url(../bell.png);
+  background-image: url(bell.png);
   background-repeat: no-repeat;
   background-size: contain;
   display: block;
