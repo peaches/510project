@@ -61,16 +61,26 @@ SR.App = Backbone.Router.extend({
       crowd: false
     });
 
-    SR.phoneInstance = new SR.HomeScreen({model: model}).render();
-    SR.phoneInstance.$el.appendTo(container);
+    if (!SR.phoneInstance) {
+      SR.phoneInstance = new SR.HomeScreen({model: model}).render();
+      SR.phoneInstance.$el.appendTo(container);
 
-    (new SR.AppOverview({model: model}))
-      .render()
-      .$el.hide().appendTo(container);
+      (new SR.AppOverview({model: model}))
+        .render()
+        .$el.hide().appendTo(container);
 
-    (new SR.ScheduleRecurring({model: model}))
-      .render()
-      .$el.hide().appendTo(container);
+      (new SR.ScheduleRecurring({model: model}))
+        .render()
+        .$el.hide().appendTo(container);
+
+      (new SR.MapProximity({model: model}))
+        .render()
+        .$el.hide().appendTo(container);
+
+      (new SR.LocationMap({model: model}))
+        .render()
+        .$el.hide().appendTo(container);
+    }
   }
 });
 
@@ -168,6 +178,15 @@ SR.HomeScreen = SR.View.extend({
     'click .button-overlay': 'openApp'
   },
 
+  initialize: function() {
+    // upon initialize, we hook into the body for a double click
+    $('body').keypress(_.bind(function(e) {
+      if (e.keyCode === 99) {
+        this.ring();
+      }
+    }, this));
+  },
+
   openApp: function() {
     this.screen('app');
   },
@@ -236,22 +255,32 @@ SR.AppOverview = SR.View.extend({
     'click .tactile-flip': 'toggleFlip',
     'click .scheduling-calendar': 'toggleCalendar',
     'click .scheduling-recurring': 'openRecurringScreen',
+    'click .proximity-location': 'openProximityScreen',
     'click header': 'exitApp'
   },
 
   toggleRing: function(e) {
+    e.preventDefault();
     this.toggle('ringer');
+
+    // one more hack, ahh well :)
+    if (!this.model.get('ringer')) {
+      SR.phoneInstance.stopRing();
+    }
   },
 
   toggleShake: function(e) {
+    e.preventDefault();
     this.toggle('shake');
   },
 
   toggleFlip: function(e) {
+    e.preventDefault();
     this.toggle('flip');
   },
 
   toggleCalendar: function(e) {
+    e.preventDefault();
     this.toggle('calendar');
   },
 
@@ -263,6 +292,10 @@ SR.AppOverview = SR.View.extend({
 
   openRecurringScreen: function() {
     this.slideIn('recurring');
+  },
+
+  openProximityScreen: function() {
+    this.slideIn('proximity');
   },
 
   exitApp: function() {
@@ -283,5 +316,133 @@ SR.ScheduleRecurring = SR.View.extend({
     this.slideOut();
   }
 });
+
+SR.MapProximity = SR.View.extend({
+  className: 'phone proximity-screen',
+  template: _.template($('#phone-proximity-screen').html()),
+  screenName: 'proximity',
+
+  events: {
+    'click header': 'openAppScreen',
+    'click .add': 'showMap'
+  },
+
+  openAppScreen: function() {
+    this.slideOut();
+  },
+
+  showMap: function() {
+    this.slideIn('location-map');
+  }
+});
+
+SR.LocationMap = SR.View.extend({
+  className: 'phone location-map-screen',
+  template: _.template($('#phone-add-location-screen').html()),
+  screenName: 'location-map',
+  dragging: false,
+
+  events: {
+    'click header': 'openAppScreen',
+    'dragover .map-picture': 'dragOver',
+    'drop .map-picture': 'drop',
+
+    // radius effect
+    'mousedown .map-inner-radius': 'innerRadius',
+    'mousedown .map-radius': 'mouseDown',
+    'mousemove .map-picture': 'mouseMove',
+    'mouseup .map-picture': 'mouseUp'
+  },
+
+  dragOver: function(e) {
+    e.preventDefault();
+  },
+
+  openAppScreen: function() {
+    this.slideOut();
+  },
+
+  drop: function(e) {
+    if (!this.dragging) {
+      var offset = this.$el.find('.map-picture').offset(),
+          center = {x: e.originalEvent.pageX, y: e.originalEvent.pageY};
+
+      this.$el.find('.map-pin').css({
+        left: center.x - offset.left - 12,
+        top: center.y - offset.top - 12
+      });
+
+      this.pinLocation = center;
+      this.mapOffset = offset;
+
+      this.centerDiv(this.$el.find('.map-radius'));
+      this.centerDiv(this.$el.find('.map-inner-radius'));
+    }
+  },
+
+  centerDiv: function($el, center, offset) {
+    center = center || this.pinLocation;
+    offset = offset || this.mapOffset;
+
+    var centerX = center.x - $el.width() / 2;
+    var centerY = center.y + 5 - $el.height() / 2;
+
+    $el.css({
+      left: centerX - offset.left,
+      top: centerY - offset.top
+    });
+  },
+
+  innerRadius: function(e) {
+    e.stopPropagation();
+    return false;
+  },
+
+  mouseDown: function(e) {
+    this.dragging = true;
+  },
+
+  mouseUp: function(e) {
+    this.dragging = false;
+  },
+
+  mouseMove: function(e) {
+    if (this.dragging) {
+      // calculate the distance between mouse and pin
+      var dx = e.pageX - this.pinLocation.x;
+      var dy = e.pageY - this.pinLocation.y;
+      var distance = Math.sqrt(dx * dx + dy * dy);
+
+      var $radius = this.$el.find('.map-radius');
+      var $innerRadius = this.$el.find('.map-inner-radius');
+
+      if (distance < 25) {
+        distance = 25;
+      }
+
+      if (distance > 150) {
+        distance = 150;
+      }
+
+      distance *= 2;
+
+      $radius.css({
+        width: distance,
+        height: distance,
+        borderRadius: distance
+      });
+
+      $innerRadius.css({
+        width: distance - 10,
+        height: distance - 10,
+        borderRadius: distance
+      });
+
+      this.centerDiv($radius);
+      this.centerDiv($innerRadius);
+    }
+  }
+});
+
 
 

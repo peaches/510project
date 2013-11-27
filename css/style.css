@@ -17,6 +17,10 @@ a:hover {
   color: #000;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .red {
   color: red;
 }
@@ -64,7 +68,7 @@ header a.current {
 .main #index {
   width: 400px;
   height: 669px;
-  background-image: url(phone.png);
+  background-image: url(../phone.png);
   position: relative;
   text-align: center;
   font-size: 30px;
@@ -74,7 +78,7 @@ header a.current {
   margin: auto;
   height: 135px;
   width: 143px;
-  background-image: url(bell.png);
+  background-image: url(../bell.png);
   background-repeat: no-repeat;
   position: relative;
   top: 150px;
@@ -95,7 +99,7 @@ header a.current {
 
 .main #phone {
   height: 669px;
-  background-image: url(phone.png);
+  background-image: url(../phone.png);
   background-repeat: no-repeat;
   position: relative;
 }
@@ -112,7 +116,7 @@ header a.current {
   position: absolute;
   top: 0;
   left: 0;
-  background-image: url(phone-back.png);
+  background-image: url(../phone-back.png);
   background-repeat: no-repeat;
   height: 100%;
   width: 100%;
@@ -187,7 +191,7 @@ header a.current {
   float: left;
   position: relative;
   top: 5px;
-  background-image: url(bell.png);
+  background-image: url(../bell.png);
   background-repeat: no-repeat;
   background-size: contain;
   display: block;
@@ -288,6 +292,24 @@ header a.current {
   content: "ON";
 }
 
+.phone .content .row .plus {
+  font-size: 30px;
+  float: right;
+  margin-right: 20px;
+}
+
+.phone .content .row.pin:after {
+  content: "";
+  width: 30px;
+  height: 30px;
+  float: right;
+  margin: 10px 12px 0 0;
+  display: block;
+  background-image: url(../map-pin.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 .phone.home-screen .top-overlay,
 .phone.home-screen .left-overlay {
   opacity: 0;
@@ -320,4 +342,83 @@ header a.current {
 .phone.home-screen:hover .button-overlay:hover {
   cursor: pointer;
 }
+
+.location-map-screen .map-picture {
+  height: 475px;
+  background-image: url(../map.png);
+  position: relative;
+}
+
+.location-map-screen .map-picture .button.overlay {
+  color: black;
+  border: 1px solid #660000;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: inline-block;
+  padding: 5px;
+}
+
+.location-map-screen .map-picture .button.overlay.ringer,
+.location-map-screen .map-picture .button.overlay.schedule,
+.location-map-screen .map-picture .button.overlay.save {
+  position: absolute;
+  bottom: 10px;
+}
+
+.location-map-screen .map-picture .button.overlay.ringer {
+  left: 10px;
+}
+
+.location-map-screen .map-picture .button.overlay.schedule {
+  left: 95px;
+}
+
+.location-map-screen .map-picture .button.overlay.save {
+  font-weight: bold;
+  right: 10px;
+}
+
+.map-radius {
+  position: absolute;
+  left: 138px;
+  top: 176px;
+
+  border: 1px solid rgba(0, 92, 255, 0.7);
+  width: 70px;
+  height: 70px;
+  border-radius: 50px;
+  background-color: rgba(0, 92, 255, 0.2);
+}
+
+.map-radius:hover {
+  cursor: pointer;
+}
+
+.map-inner-radius {
+  position: absolute;
+  left: 142px;
+  top: 180px;
+
+  width: 60px;
+  height: 60px;
+  border-radius: 80px;
+}
+
+.map-inner-radius:hover {
+  cursor: default;
+}
+
+.map-pin {
+  position: absolute;
+  left: 161px;
+  top: 190px;
+
+  width: 30px;
+  height: 30px;
+  display: block;
+  background-image: url(../map-pin.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 

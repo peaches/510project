@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css_style.css">
-<link rel="stylesheet" href="css_shake.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/shake.css">
 
 <header>
   <a class="index" href="#" class="current">Overview</a>
@@ -15,9 +15,8 @@
         <div class="content">
           <div class="logo">
             <span class="christmas">
-              <span class="red">'Tis</span>
-              <span class="white">the</span>
-              <span class="green">Season</span>
+              <span class="red">Happy</span>
+              <span class="green">Holidays</span>
             </span>
             <span class="title">Smart<br>Ringer</span>
           </div>
@@ -85,7 +84,7 @@
         <div class="toggle <%= calendar ? 'on' : '' %>"></div>
       </div>
       <div class="row clickable scheduling-recurring">
-        Set recurring events
+        Recurring events
       </div>
 
       <div class="row header">Custom Settings</div>
@@ -106,19 +105,67 @@
         <div class="icon"></div>
         <div class="title">Recurring events</div>
       </header>
+      <div class="row bold">
+        Add new <span class="plus">+</span>
+      </div>
       <div class="row header">Configured events</div>
+      <div class="row pin">
+        In class
+      </div>
       <div class="row">
-        something
+        Baby's nap time
       </div>
     </div>
   </div>
 </script>
 
-<script src="js_jquery.js"></script>
-<script src="js_underscore.js"></script>
-<script src="js_backbone.js"></script>
-<script src="js_app.js"></script>
-<script src="js_menu.js"></script>
+<script type="text/html" id="phone-proximity-screen">
+  <div class="content-wrapper">
+    <div class="content">
+      <header>
+        <div class="icon"></div>
+        <div class="title">Locations</div>
+      </header>
+      <div class="row bold add clickable">
+        Add new <span class="plus">+</span>
+      </div>
+      <div class="row header">Saved locations</div>
+      <div class="row">
+        Library
+      </div>
+      <div class="row">
+        Cinerama
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/html" id="phone-add-location-screen">
+  <div class="content-wrapper">
+    <div class="content">
+      <header>
+        <div class="icon"></div>
+        <div class="title">Setting location</div>
+      </header>
+
+      <div class="map-picture">
+        <div class="map-radius"></div>
+        <div class="map-inner-radius"></div>
+        <div class="map-pin" draggable="true"></div>
+
+        <div class="button overlay ringer">Ringer: off</div>
+        <div class="button overlay schedule">Schedule</div>
+        <div class="button overlay save">Save</div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script src="js/jquery.js"></script>
+<script src="js/underscore.js"></script>
+<script src="js/backbone.js"></script>
+<script src="js/app.js"></script>
+<script src="js/menu.js"></script>
 
 <script type="text/javascript">
   SR.app = new SR.App();
