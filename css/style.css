@@ -9,7 +9,7 @@ body {
 }
 
 a, a:visited {
-  color: #660000;
+  color: #224286;
   text-decoration: none;
 }
 
@@ -22,7 +22,7 @@ a:hover {
 }
 
 .red {
-  color: red;
+  color: rgb(192, 21, 21);
 }
 
 .white {
@@ -34,14 +34,14 @@ a:hover {
 }
 
 .btn {
-  background-color: #ffcc99;
+  background-color: rgba(255, 204, 153, 0.33);
   font-size: 20px;
 }
 
 header {
   display: block;
   height: 70px;
-  background-color: #ffcc99;
+  background-color: rgba(255, 204, 153, 0.33);
   text-align: center;
   line-height: 70px;
 }
@@ -179,7 +179,7 @@ header a.current {
 
 .phone .content > header {
   overflow: hidden;
-  background-color: #1c567e;
+  background-color: #224286;
   height: 40px;
   padding-left: 30px;
   line-height: 40px;
