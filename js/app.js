@@ -45,7 +45,7 @@ SR.App = Backbone.Router.extend({
 
   docs: function() {
     this.hideAll();
-    console.log('docs');
+    $('#docs').show();
   },
 
   proto: function() {

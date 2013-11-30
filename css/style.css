@@ -70,9 +70,9 @@ header a.current {
 }
 
 .main #index {
-  width: 400px;
   height: 669px;
-  background-image: url(../phone.png);
+  background-image: url(../assets/phone.png);
+  background-repeat: no-repeat;
   position: relative;
   text-align: center;
   font-size: 30px;
@@ -82,7 +82,7 @@ header a.current {
   margin: auto;
   height: 135px;
   width: 143px;
-  background-image: url(../bell.png);
+  background-image: url(../assets/bell.png);
   background-repeat: no-repeat;
   position: relative;
   top: 150px;
@@ -101,9 +101,13 @@ header a.current {
   top: 110px;
 }
 
+.main #index .authors {
+  margin: 100px 0 0 250px;;
+}
+
 .main #phone {
   height: 669px;
-  background-image: url(../phone.png);
+  background-image: url(../assets/phone.png);
   background-repeat: no-repeat;
   position: relative;
 }
@@ -120,7 +124,7 @@ header a.current {
   position: absolute;
   top: 0;
   left: 0;
-  background-image: url(../phone-back.png);
+  background-image: url(../assets/phone-back.png);
   background-repeat: no-repeat;
   height: 100%;
   width: 100%;
@@ -128,12 +132,19 @@ header a.current {
   content: "";
 }
 
-.main #proto .text-content {
+.main .text-content {
   margin: 100px 200px 0 0;
   float: right;
   width: 200px;
   position: relative;
   z-index: 10;
+}
+
+#index .text-content {
+  text-align: left;
+  width: 480px;
+  font-size: 22px;
+  margin: 100px 0 0 0;
 }
 
 .main #proto .text-content .btn {
@@ -195,7 +206,7 @@ header a.current {
   float: left;
   position: relative;
   top: 5px;
-  background-image: url(../bell.png);
+  background-image: url(../assets/bell.png);
   background-repeat: no-repeat;
   background-size: contain;
   display: block;
@@ -311,7 +322,7 @@ header a.current {
   float: right;
   margin: 10px 12px 0 0;
   display: block;
-  background-image: url(../map-pin.svg);
+  background-image: url(../assets/map-pin.svg);
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -351,7 +362,7 @@ header a.current {
 
 .location-map-screen .map-picture {
   height: 475px;
-  background-image: url(../map.png);
+  background-image: url(../assets/map.png);
   position: relative;
 }
 
@@ -422,7 +433,7 @@ header a.current {
   width: 30px;
   height: 30px;
   display: block;
-  background-image: url(../map-pin.svg);
+  background-image: url(../assets/map-pin.svg);
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -433,4 +444,45 @@ header a.current {
   font-size: 16px;
   text-align: center;
   margin-bottom: 30px;
+}
+
+a.word, a.pdf {
+  display: block;
+  float: left;
+  width: 50px;
+  height: 50px;
+  background-size: contain;
+}
+
+a.word {
+  background-image: url(../assets/word.png);
+}
+
+a.pdf {
+  background-image: url(../assets/pdf.png);
+}
+
+#docs {
+  margin-top: 100px;
+}
+
+#docs a {
+  margin-left: 20px;
+}
+
+#docs aside {
+  margin-left: 180px;
+}
+
+#docs .link {
+  width: 480px;
+  margin: 10px auto;
+  padding: 10px;
+  height: 70px;
+  font-size: 30px;
+  border-radius: 5px;
+}
+
+#docs .link:hover {
+  background-color: rgba(255, 204, 153, 0.33);
 }
