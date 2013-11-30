@@ -9,7 +9,7 @@ SR.App = Backbone.Router.extend({
   },
 
   initialize: function() {
-    SR.mp3 = new Audio('ringer.mp3');
+    SR.mp3 = new Audio('assets/ringer.mp3');
     var $proto = $('#proto');
 
     $proto.on('click', '.call', _.bind(this.dispatch, this, 'receiveCall'));
